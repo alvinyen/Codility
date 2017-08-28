@@ -44,7 +44,7 @@ function listCombination (coordinatesArray) {
         }
     }
 
-    console.log(result);
+    // console.log(result);
 
     return result;
 }
@@ -60,14 +60,16 @@ function howManyCollinearPoints ( combinations ) {
     for (let i = 0; i<combinations.length; i++) {
         if(isPointsCollinear(combinations[i])) {
             count++;
-            console.log(combinations[i]);
+            // console.log(combinations[i]);
         }
     }
     return count;
 }
 
 function process (coordinatesArray) {
-    return -1;
+    if (combination(coordinatesArray.length, 3) > 100000000) return -1;
+
+    return howManyCollinearPoints(listCombination(coordinatesArray));
 }
 
 let coordinatesArray = [
@@ -79,6 +81,8 @@ let coordinatesArray = [
     {x: 4, y: 2},
     {x: 5, y: 1}
 ];
-listCombination(coordinatesArray);
-console.log(howManyCollinearPoints(listCombination(coordinatesArray)));
+
+console.log(process(coordinatesArray));
+
+
 
