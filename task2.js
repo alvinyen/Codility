@@ -73,7 +73,7 @@ function findKey_MaxCumuTimeLog (map_number_seconds) {
 
 function bill (map_number_seconds) {
     let result = 0;
-    for (let [key, value] of map_number_seconds.entries() ) {
+    for (let value of map_number_seconds.values() ) {
         if ( value<300 ) {
             result += value * 3; // 3cents/s
         } else {
