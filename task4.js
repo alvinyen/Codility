@@ -49,9 +49,36 @@ function listCombination (coordinatesArray) {
     return result;
 }
 
-let coordinatesArray = ['A', 'B', 'C', 'D', 'E'];
-listCombination(coordinatesArray);
+function isPointsCollinear ( points )  {
+    return (
+        (points[0].y - points[1].y) / (points[0].x - points[1].x) === (points[0].y - points[2].y) / (points[0].x - points[2].x) 
+    );
+}
 
-coordinatesArray = [{x: 15, y: 20}, {x: 16, y: 21}, {x: 17, y: 22}, {x: 18, y: 23}, {x: 19, y: 24}];
+function howManyCollinearPoints ( combinations ) {
+    let count = 0;
+    for (let i = 0; i<combinations.length; i++) {
+        if(isPointsCollinear(combinations[i])) {
+            count++;
+            console.log(combinations[i]);
+        }
+    }
+    return count;
+}
+
+function process (coordinatesArray) {
+    return -1;
+}
+
+let coordinatesArray = [
+    {x: 0, y: 0}, 
+    {x: 1, y: 1}, 
+    {x: 2, y: 2}, 
+    {x: 3, y: 3}, 
+    {x: 3, y: 2},
+    {x: 4, y: 2},
+    {x: 5, y: 1}
+];
 listCombination(coordinatesArray);
+console.log(howManyCollinearPoints(listCombination(coordinatesArray)));
 
