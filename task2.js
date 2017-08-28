@@ -57,6 +57,51 @@ function preProcess (log) {
     return map_number_seconds;
 }
 
-const log = `00:01:07,400-234-090\n00:05:01,701-080-080\n00:05:00,400-234-090`;
+function findKey_MaxCumuTimeLog (map_number_seconds) {
+    let max = -1;
+    let keysInNum_maxValue = [];
+    for (let [key, value] of map_number_seconds.entries()) {
+        if ( value > max ) {
+            max = value;
+            keysInNum_maxValue = [ parseInt(key) ];
+        } else if ( value === max ) {
+            keysInNum_maxValue.push(parseInt(key));
+        }
+    }
+    return keysInNum_maxValue.length > 1 ? Math.min(...keysInNum_maxValue) : keysInNum_maxValue.pop();
+}
 
-console.log(preProcess(log));
+function bill (map_number_seconds) {
+    let result = 0;
+    for (let [key, value] of map_number_seconds.entries() ) {
+        if ( value<300 ) {
+            result += value * 3; // 3cents/s
+        } else {
+            result += Math.ceil(value/60) * 150; // 150cents/m
+        }
+    }
+    return result;
+}
+
+function process (log) {
+    const map_number_seconds = preProcess(log);
+    const key = (findKey_MaxCumuTimeLog(map_number_seconds)).toString();
+    map_number_seconds.delete(key);
+    return bill(map_number_seconds);
+}
+
+let log = `00:01:07,400-234-090
+             00:05:01,701-080-080
+             00:05:00,400-234-090
+             00:06:00,901-989-000
+             00:00:07,901-989-000`;
+
+console.log(process(log));
+
+log = `00:01:07,400-234-090
+        00:05:01,701-080-080
+        00:05:00,400-234-090`;
+
+console.log(process(log));
+
+
