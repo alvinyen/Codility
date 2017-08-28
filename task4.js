@@ -33,7 +33,20 @@ function listCombination (coordinatesArray) {
     const k = 3;
     const prefixes = getPrefixes(coordinatesArray);
     
-    console.log(prefixes);
+    // console.log(prefixes);
+
+    let result = [];
+    
+    for (let i=0; i<prefixes.length; i++) {
+        const index = coordinatesArray.indexOf(prefixes[i][1]);
+        for (let j=index+1; j<coordinatesArray.length; j++) {
+            result.push([prefixes[i][0], prefixes[i][1], coordinatesArray[j]]);
+        }
+    }
+
+    console.log(result);
+
+    return result;
 }
 
 let coordinatesArray = ['A', 'B', 'C', 'D', 'E'];
