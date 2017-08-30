@@ -55,7 +55,7 @@ function isPointsCollinear ( points )  {
     );
 }
 
-function howManyCollinearPoints ( combinations ) {
+function howManyCollinearsOfPoints ( combinations ) {
     let count = 0;
     for (let i = 0; i<combinations.length; i++) {
         if(isPointsCollinear(combinations[i])) {
@@ -69,7 +69,7 @@ function howManyCollinearPoints ( combinations ) {
 function process (coordinatesArray) {
     if (combination(coordinatesArray.length, 3) > 100000000) return -1;
 
-    return howManyCollinearPoints(listCombination(coordinatesArray));
+    return howManyCollinearsOfPoints(listCombination(coordinatesArray));
 }
 
 let coordinatesArray = [
